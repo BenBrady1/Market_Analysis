@@ -1,0 +1,13 @@
+Table,Source,Description
+FEDFUNDS,FRED (Federal Reserve),"The federal funds rate — the interest rate at which banks lend to each other overnight. Set by the Fed as the primary tool for controlling inflation and economic growth."
+NASDAQCOM,FRED (NASDAQ),"Daily closing value of the NASDAQ Composite Index tracking all stocks listed on the NASDAQ exchange. Heavy weighting toward technology companies makes it the primary barometer of tech sector performance."
+SP500,FRED / S&P Dow Jones Indices,"Daily closing value of the S&P 500 Index tracking 500 large US companies. The broadest measure of overall US stock market health and the most widely referenced benchmark in finance."
+DGS10,FRED (US Treasury),"Daily yield on 10-year US Treasury bonds. Rising yields signal investor concern about inflation or creditworthiness. The most important benchmark interest rate in global finance."
+CPIAUCSL,FRED (Bureau of Labor Statistics),"Consumer Price Index measuring monthly inflation across urban consumer goods and services. The primary measure of purchasing power erosion for average Americans."
+DTWEXBGS,FRED (Federal Reserve),"Broad US Dollar Index measuring the dollar's value against a basket of major trading partner currencies. Declining values signal dollar weakness relative to the rest of the world."
+Gold,Macrotrends / World Gold Council,"Monthly gold spot price in USD per troy ounce going back to 1915. Gold is considered a safe haven asset — rising prices signal fear, uncertainty, and dollar debasement."
+GFDEGDQ188S,FRED (US Treasury / BEA),"Federal debt as a percentage of GDP measured quarterly. Rising values indicate the US is borrowing faster than the economy is growing — the core metric behind the credit downgrades."
+FYOINT,FRED (US Treasury),"Annual federal interest payments on outstanding debt. Now exceeding $1 trillion annually and consuming 34% of tax revenue — a structural constraint on government spending."
+crunchbase,Kaggle / Crunchbase,"54,294 US startup companies with founding dates, first funding dates, total funding raised, funding rounds, and market category. Covers approximately 1990-2014."
+economic_events,Created manually,"19 major economic events from 1971-2024 with year, event name, and three sentence description. Used as an interactive reference layer across all pages."
+DimDate,Generated in Power Query,"Date spine from 1971 to present connecting all time-based tables through a single date relationship. Standard data warehousing practice for time intelligence calculations."

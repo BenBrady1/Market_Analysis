@@ -1,0 +1,17 @@
+Year,Event,Sector,Return_Pct,Performance_Rank
+2000,Dot-com Crash,Technology,-41,Bottom
+2000,Dot-com Crash,Consumer Discretionary,-22,Second Bottom
+2000,Dot-com Crash,Consumer Staples,2,Second Top
+2000,Dot-com Crash,Energy,18,Top
+2008,Financial Crisis,Financials,-55,Bottom
+2008,Financial Crisis,Consumer Discretionary,-33,Second Bottom
+2008,Financial Crisis,Health Care,-23,Second Top
+2008,Financial Crisis,Consumer Staples,-15,Top
+2020,COVID Crash,Energy,-37,Bottom
+2020,COVID Crash,Financials,-4,Second Bottom
+2020,COVID Crash,Health Care,14,Second Top
+2020,COVID Crash,Technology,44,Top
+2022,Rate Hike Cycle,Consumer Discretionary,-37,Bottom
+2022,Rate Hike Cycle,Technology,-28,Second Bottom
+2022,Rate Hike Cycle,Consumer Staples,-1,Second Top
+2022,Rate Hike Cycle,Energy,59,Top
