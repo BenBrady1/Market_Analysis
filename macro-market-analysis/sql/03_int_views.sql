@@ -39,7 +39,7 @@ raw_joined AS (
         TRY_CAST(f.[observations.value]   AS FLOAT) AS federal_interest_raw
     FROM [stg_external].[dim_date] d
     -- DSG10 is finicky on FREDS side it is not always avaialble from the API. When unavaiable go to the site and download it manually. Swap between these 2 accordingly. 
-    -- LEFT JOIN [stg_fred].[cpi_raw]      c   ON CAST(c.[observations.date]   AS DATE) = d.month_date --Manual upload
+    -- LEFT JOIN [stg_fred].[cpi_raw]      c   ON CAST(c.[observations.date]   AS DATE) = d.month_date --Manual upload: https://fred.stlouisfed.org/series/DGS10
     LEFT JOIN [stg_fred].[dsg10_raw] dsg ON CAST(dsg.[observations.date] AS DATE) = d.month_date -- API Call
     LEFT JOIN [stg_fred].[dsg10_raw]    dsg ON CAST(dsg.[observations.date] AS DATE) = d.month_date
     LEFT JOIN [stg_fred].[sp500_raw]    s   ON CAST(s.[observations.date]   AS DATE) = d.month_date
