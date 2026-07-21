@@ -139,4 +139,43 @@ BEGIN
             ('usp_refresh_all_external_staging', 'crunchbase', 'FAILED', @error, 0, GETDATE())
     END CATCH
 END
+
+-- ============================================================
+-- Purpose: Merges gics_sector onto [stg_external].[crunchbase]
+-- from the staged [stg_external].[market_gics] lookup table.
+--
+-- Must run AFTER both usp_refresh_external_staging calls that
+-- load 'crunchbase' and 'market_gics' — this procedure does not
+-- refresh either source itself, it only joins them.
+-- ============================================================
+
+CREATE OR ALTER PROCEDURE [stg_external].[usp_apply_gics_sector]
+AS
+BEGIN
+    DECLARE @rows   INT
+    DECLARE @status VARCHAR(50)
+    DECLARE @error  VARCHAR(MAX)
+
+    SET @status = 'SUCCESS'
+
+    BEGIN TRY
+        UPDATE c
+        SET c.gics_sector = m.gics_sector
+        FROM [stg_external].[crunchbase] c
+        JOIN [stg_external].[market_gics] m
+            ON m.market = TRIM(c.market)
+
+        SET @rows = @@ROWCOUNT
+    END TRY
+    BEGIN CATCH
+        SET @status = 'FAILED'
+        SET @error  = ERROR_MESSAGE()
+        SET @rows   = 0
+    END CATCH
+
+    INSERT INTO [stg_fred].[pipeline_log]
+        (procedure_name, table_name, status, error_message, rows_loaded, executed_at)
+    VALUES
+        ('usp_apply_gics_sector', 'crunchbase', @status, @error, @rows, GETDATE())
+END
 GO
