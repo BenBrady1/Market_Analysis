@@ -31,7 +31,7 @@ CREATE TABLE [stg_external].[crunchbase]
     founded_quarter     VARCHAR(MAX),
     founded_year        INT,
     first_funding_at    VARCHAR(MAX),
-    last_funding_at     VARCHAR(MAX)
+    last_funding_at     VARCHAR(MAX),
      gics_sector        VARCHAR(MAX)
 );
 
