@@ -35,6 +35,11 @@ CREATE TABLE [stg_external].[crunchbase]
     gics_sector         VARCHAR(MAX)
 );
 
+CREATE TABLE [stg_external].[market_gics] (
+    market VARCHAR(100), 
+    gics_sector VARCHAR(50)
+);
+
 CREATE TABLE [stg_external].[economic_events_raw]
 (
     year        INT,
