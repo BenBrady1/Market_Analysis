@@ -1,0 +1,80 @@
+-- ============================================================
+-- 05_dax_calculations.dax
+-- Macro Market Analysis — Power BI Semantic Model
+-- Author: Benjamin Brady
+--
+-- Report-layer calculations. The gold layer (04_mart_views.sql)
+-- intentionally stops at clean, joined, monthly-grain data --
+-- no time intelligence there. Everything below is where "current
+-- value / prior year / YoY %" actually gets computed, once,
+-- reusable against any metric, instead of duplicated per column
+-- upstream in SQL.
+--
+-- Prerequisite: requires a marked Date table (DateTable) related
+-- to observation_date on mart_economic_indicators and
+-- mart_rate_cycles. SAMEPERIODLASTYEAR() will not return correct
+-- results against Power BI's auto-generated hidden date tables.
+-- ============================================================
+
+
+-- ============================================================
+-- BASE MEASURES
+-- CPI, gold, S&P 500, and NASDAQ are point-in-time levels, not
+-- additive facts -- summing them across a period is meaningless.
+-- LASTNONBLANK returns the most recent value within whatever
+-- period is currently filtered.
+-- ============================================================
+
+CPI =
+LASTNONBLANK(
+    'mart mart_economic_indicators'[observation_date],
+    CALCULATE(SUM('mart mart_economic_indicators'[cpi]))
+)
+
+Gold =
+LASTNONBLANK(
+    'mart mart_economic_indicators'[observation_date],
+    CALCULATE(SUM('mart mart_economic_indicators'[gold]))
+)
+
+S&P 500 =
+LASTNONBLANK(
+    'mart mart_economic_indicators'[observation_date],
+    CALCULATE(SUM('mart mart_economic_indicators'[sp500]))
+)
+
+NASDAQ =
+LASTNONBLANK(
+    'mart mart_economic_indicators'[observation_date],
+    CALCULATE(SUM('mart mart_economic_indicators'[nasdaq]))
+)
+
+
+-- ============================================================
+-- CALCULATION GROUP: Time Intelligence
+-- Column name: Time Calculation
+-- Applies to any base measure above without writing new DAX
+-- per metric.
+-- ============================================================
+
+-- Item 1: Current Value
+Current Value =
+SELECTEDMEASURE()
+
+-- Item 2: Prior Year
+Prior Year =
+CALCULATE(
+    SELECTEDMEASURE(),
+    SAMEPERIODLASTYEAR('DateTable'[Date])
+)
+
+-- Item 3: YoY %
+YoY % =
+VAR CurrentVal = SELECTEDMEASURE()
+VAR PriorVal =
+    CALCULATE(
+        SELECTEDMEASURE(),
+        SAMEPERIODLASTYEAR('DateTable'[Date])
+    )
+RETURN
+    DIVIDE(CurrentVal - PriorVal, PriorVal)
