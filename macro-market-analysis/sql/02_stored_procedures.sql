@@ -81,6 +81,9 @@ BEGIN
     EXEC [stg_external].[usp_refresh_external_staging]
         'data_sources_raw',
         'https://onelake.dfs.fabric.microsoft.com/8143cf61-40ef-40f2-b6b9-8de0b03d4744/a7e595a3-0f06-4103-99a3-875dfa5bbc36/Files/data_sources.csv'
+    EXEC [stg_external].[usp_refresh_external_staging]
+        'data_sources_raw',
+        'https://onelake.dfs.fabric.microsoft.com/8143cf61-40ef-40f2-b6b9-8de0b03d4744/a7e595a3-0f06-4103-99a3-875dfa5bbc36/Files/market_gics.csv'
 
     -- dim_date: custom transformation on load (month truncation)
     BEGIN TRY
